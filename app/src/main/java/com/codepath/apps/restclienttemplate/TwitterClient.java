@@ -46,14 +46,15 @@ public void getHomeTimeline(int page, JsonHttpResponseHandler handler) {
     String apiUrl = getApiUrl("statuses/home_timeline.json");
 	RequestParams params = new RequestParams();
     params.put("page", String.valueOf(page));
-    getClient().get(apiUrl, params, handler);
+    //getClient().get(apiUrl, params, handler);
+	client.get(apiUrl, params, handler);
 }
 // RestClient.java
 public void postTweet(String body, JsonHttpResponseHandler handler) {
     String apiUrl = getApiUrl("statuses/update.json");
     RequestParams params = new RequestParams();
     params.put("status", body);
-    getClient().post(apiUrl, params, handler);
+    client.get(apiUrl, params, handler); // getClinet().post(apiUrl, params, handler);
 }
 
 	/* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
