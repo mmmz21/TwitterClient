@@ -20,7 +20,7 @@ import com.github.scribejava.core.builder.api.BaseApi;
  * NOTE: You may want to rename this object based on the service i.e TwitterClient or FlickrClient
  * 
  */
-public class RestClient extends OAuthBaseClient {
+public class TwitterClient extends OAuthBaseClient {
 	public static final BaseApi REST_API_INSTANCE = TwitterApi.instance();
     public static final String REST_URL = "https://api.twitter.com/1.1";
 	public static final String REST_CONSUMER_KEY = BuildConfig.CONSUMER_KEY;       
@@ -32,7 +32,7 @@ public class RestClient extends OAuthBaseClient {
 	// See https://developer.chrome.com/multidevice/android/intents
 	public static final String REST_CALLBACK_URL_TEMPLATE = "intent://%s#Intent;action=android.intent.action.VIEW;scheme=%s;package=%s;S.browser_fallback_url=%s;end";
 
-	public RestClient(Context context) {
+	public TwitterClient(Context context) {
 		super(context, REST_API_INSTANCE,
 				REST_URL,
 				REST_CONSUMER_KEY,
@@ -41,21 +41,22 @@ public class RestClient extends OAuthBaseClient {
 				String.format(REST_CALLBACK_URL_TEMPLATE, context.getString(R.string.intent_host),
 						context.getString(R.string.intent_scheme), context.getPackageName(), FALLBACK_URL));
 	}
-// RestClient.java
-public void getHomeTimeline(int page, JsonHttpResponseHandler handler) {
-    String apiUrl = getApiUrl("statuses/home_timeline.json");
-	RequestParams params = new RequestParams();
-    params.put("page", String.valueOf(page));
-    //getClient().get(apiUrl, params, handler);
-	client.get(apiUrl, params, handler);
-}
-// RestClient.java
-public void postTweet(String body, JsonHttpResponseHandler handler) {
-    String apiUrl = getApiUrl("statuses/update.json");
-    RequestParams params = new RequestParams();
-    params.put("status", body);
-    client.get(apiUrl, params, handler); // getClinet().post(apiUrl, params, handler);
-}
+	// TwitterClient.java
+	public void getHomeTimeline(JsonHttpResponseHandler handler) {
+    	String apiUrl = getApiUrl("statuses/home_timeline.json");
+		RequestParams params = new RequestParams();
+		//params.put("format", "json");
+    	params.put("count", 25);
+    	params.put("since_id",1);
+		client.get(apiUrl, params, handler);
+	}
+	// TwitterClient.java
+	public void postTweet(String body, JsonHttpResponseHandler handler) {
+    	String apiUrl = getApiUrl("statuses/update.json");
+    	RequestParams params = new RequestParams();
+    	params.put("status", body);
+    	client.get(apiUrl, params, handler); // getClinet().post(apiUrl, params, handler);
+	}
 
 	/* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
 	 * 	  i.e getApiUrl("statuses/home_timeline.json");

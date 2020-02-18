@@ -7,20 +7,23 @@ import org.json.JSONObject;
 
 public class User {
 
-    @ColumnInfo
-    String name;
+    //@ColumnInfo
+    public String name;
+    public String screenName;
+    public String profileImageUrl;
 
     // normally this field would be annotated @PrimaryKey because this is an embedded object
     // it is not needed
-    @ColumnInfo
-    Long twitter_id;
+   // @ColumnInfo
+    //Long twitter_id;
 
     // Parse model from JSON
-    public User parseJSON(JSONObject tweetJson) throws JSONException {
+    public static User fromJson(JSONObject jsonObject) throws JSONException {
 
         User user = new User();
-        this.twitter_id = tweetJson.getLong("id");
-        this.name = tweetJson.getString("name");
+        user.name = jsonObject.getString("name");
+        user.screenName = jsonObject.getString("screen_name");
+        user.profileImageUrl = jsonObject.getString("profile_image_url_https");
         return user;
     }
 }

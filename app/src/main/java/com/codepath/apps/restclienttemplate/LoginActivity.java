@@ -1,38 +1,35 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
-import com.codepath.apps.restclienttemplate.models.SampleModel;
-import com.codepath.apps.restclienttemplate.models.SampleModelDao;
-import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.TwitterDao;
 import com.codepath.oauth.OAuthLoginActionBarActivity;
 
-public class LoginActivity extends OAuthLoginActionBarActivity<RestClient> {
+public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 
-	SampleModelDao sampleModelDao;
+	TwitterDao twitterDao;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 
-		final Tweet tweet = new Tweet();
-		tweet.setName("CodePath");
+		//final Tweet tweet = new Tweet();
+		//Tweet.setName("CodePath");
 
-		sampleModelDao = ((RestApplication) getApplicationContext()).getMyDatabase().TwitterDao();
+		//twitterDao = ((TwitterApp) getApplicationContext()).getMyDatabase().twitterDao();
 
-		AsyncTask.execute(new Runnable() {
+		/*AsyncTask.execute(new Runnable() {
 			@Override
 			public void run() {
-				sampleModelDao.insertModel(sampleModel);
+				twitterDao.insertTweet(tweet);
 			}
-		});
+		});*/
 	}
-
 
 	// Inflate the menu; this adds items to the action bar if it is present.
 	@Override
@@ -45,7 +42,8 @@ public class LoginActivity extends OAuthLoginActionBarActivity<RestClient> {
 	// i.e Display application "homepage"
 	@Override
 	public void onLoginSuccess() {
-		Intent i = new Intent(this, PhotosActivity.class);
+		Log.i("w", "login success");
+		Intent i = new Intent(this, TimelineActivity.class);
 		startActivity(i);
 	}
 

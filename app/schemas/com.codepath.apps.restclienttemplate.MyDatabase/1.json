@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b63ce649677b6fd8d510aaf00dc972a1",
+    "identityHash": "d92e92fd3f7cca5ece9dd6b65c67d0aa",
     "entities": [
       {
         "tableName": "Tweet",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `userHandle` TEXT, `timestamp` TEXT, `body` TEXT, `name` TEXT, `twitter_id` INTEGER, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `body` TEXT, `createdAt` TEXT, `timeStamp` TEXT, `name` TEXT, `screenName` TEXT, `profileImageUrl` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -15,20 +15,20 @@
             "notNull": false
           },
           {
-            "fieldPath": "userHandle",
-            "columnName": "userHandle",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "timestamp",
-            "columnName": "timestamp",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "body",
             "columnName": "body",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "timeStamp",
+            "columnName": "timeStamp",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -39,9 +39,15 @@
             "notNull": false
           },
           {
-            "fieldPath": "user.twitter_id",
-            "columnName": "twitter_id",
-            "affinity": "INTEGER",
+            "fieldPath": "user.screenName",
+            "columnName": "screenName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user.profileImageUrl",
+            "columnName": "profileImageUrl",
+            "affinity": "TEXT",
             "notNull": false
           }
         ],
@@ -58,7 +64,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b63ce649677b6fd8d510aaf00dc972a1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd92e92fd3f7cca5ece9dd6b65c67d0aa')"
     ]
   }
 }
