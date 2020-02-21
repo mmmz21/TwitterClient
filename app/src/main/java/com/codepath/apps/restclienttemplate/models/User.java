@@ -4,7 +4,9 @@ import androidx.room.ColumnInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
+@Parcel
 public class User {
 
     //@ColumnInfo
@@ -12,6 +14,8 @@ public class User {
     public String screenName;
     public String profileImageUrl;
 
+    // empty constructor needed by the Parceler library
+    public User(){};
     // normally this field would be annotated @PrimaryKey because this is an embedded object
     // it is not needed
    // @ColumnInfo

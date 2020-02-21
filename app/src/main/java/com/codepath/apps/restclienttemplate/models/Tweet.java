@@ -10,10 +10,12 @@ import com.codepath.apps.restclienttemplate.TimeFormatter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel
 @Entity
 public class Tweet {
 
@@ -28,6 +30,9 @@ public class Tweet {
     public String timeStamp;
     @Embedded
     public User user;
+
+    // empty constructor needed by the Parceler library
+    public Tweet(){};
 
     public static Tweet fromJson(JSONObject jsonObject)  throws JSONException{
         Tweet tweet = new Tweet();
